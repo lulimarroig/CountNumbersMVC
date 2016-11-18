@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace CountNumbers.Controllers
 {
@@ -22,7 +17,7 @@ namespace CountNumbers.Controllers
             int[] result = validateInput(numbers);
             if (result == null)
             {
-                ViewBag.Message = "The input is not in the correct format. The corresponding format is: [x,y,z]";
+                ViewBag.Message = "Error";
             }
             else
             {
@@ -63,9 +58,41 @@ namespace CountNumbers.Controllers
 
         private string createOutput(int[] numbers)
         {
-            string output = "SAlidaaaa";
+            string output = "[";
 
-            return output;
+            System.Array.Sort(numbers);
+            int size = numbers.Length - 1;
+
+            int actual = numbers[size];
+            int count = 0;
+            for (int i = size; i>= 0; i--)
+            {
+                if(actual == numbers[i])
+                {
+                    count++;
+                }else
+                {
+                    if(count > 2)
+                    {
+                        output += actual + ",";
+                    }
+                    count = 1;
+                    actual = numbers[i];
+                }
+            }
+
+            if (count > 2)
+            {
+                output += actual;
+            }else
+            {
+                if (output.EndsWith(","))
+                {
+                    output.Remove(output.Length - 1);
+                }
+            }
+
+            return output + "]";
         }
     }
 }
