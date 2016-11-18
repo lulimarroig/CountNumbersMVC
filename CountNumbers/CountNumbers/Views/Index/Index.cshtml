@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <h3>Welcome to numbers counter page!</h3>
+
+        @using (Html.BeginForm("Submit", "Index"))
+        {
+            <input type="text" name="numbers"><br>
+            <label id="result">@ViewBag.Message</label><br>
+            <input type="submit" value="Send">
+        }
+    </div>
+</body>
+</html>
