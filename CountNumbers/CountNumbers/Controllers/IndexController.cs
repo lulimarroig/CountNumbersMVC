@@ -27,6 +27,12 @@ namespace CountNumbers.Controllers
             return View("Index");
         }
 
+
+        /**This method validates the input from the user:
+         * It validates the '[' and ']' symbols and then try to parse the data
+         * In case the input is correct it returns an array with the corresponding data
+         * If the input is invlaid it returns a null array.
+         **/
         private int[] validateInput(string input)
         {
             int[] numbers = null;
@@ -35,6 +41,7 @@ namespace CountNumbers.Controllers
             {
                 input = input.Replace('[', ' ');
                 input = input.Replace(']', ' ');
+                
                 string[] inputs = input.Split(',');
                 numbers = new int[inputs.Length];
                 for (int i = 0; i < inputs.Length; i++)
@@ -48,6 +55,7 @@ namespace CountNumbers.Controllers
                     }
                     else
                     {
+                        //The entry could not be mapped as a number, the the input is not valid
                         return null;
                     }
 
@@ -56,6 +64,11 @@ namespace CountNumbers.Controllers
             return numbers;
         }
 
+        /** This method is in charge of generating the output for a valid array of integers
+         *  It orders the array in ascending order
+         *  Then it loops through the numbers in the array counting the repeated ones
+         *  It adds a number to the output when it appears three or more times in the sequence 
+         **/
         private string createOutput(int[] numbers)
         {
             string output = "[";
